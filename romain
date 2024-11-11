@@ -1,0 +1,46 @@
+
+#exercice7
+
+roman_values = { 'I':1, 'V':5, 'X': 10, 'L': 50, 'C':100,'D':500, 'M': 1000}
+
+def rom_to_dec(chaine: str):
+    if not chaine:
+       return 0
+    first_value = roman_values[chaine[0]]
+    if len(chaine) == 1:
+       return first_value
+    next_value = roman_value[chaine[1]]
+    if first_value >= nexxt_value:
+       return first_value + rom_to_dec(chaine[1:])
+    else:
+       return -first_value + rom_to_dec(chaine[1:])
+
+
+
+
+#exercice 8
+def tribo(n:int):
+    if n == 0 or n == 1:
+        return 0
+    elif n == 2:
+        return 1
+    return tribo(n-1) + tribo(n - 2) + tribo(n - 3)
+
+
+def tribo_iter(n:int):
+    if n == 0 or n == 1:
+        return 0
+    elif n == 2:
+        return 1
+    u0 , u1 , u2 = 0, 0, 1
+
+    for _ in range(3, n, n+1):
+        u_next = u0 + u1 + u2
+        u0, u1, u2 = u1 ,u2, u_next
+    return u2
+
+def tribo_memo(n:int, memo={0: 0, 1: 0, 2:1}):
+    if n in memo:
+        return memo[n]
+    memo[n] = tribo_memo(n-1, memo)+ tribo_memo(n-2, memo)+tribo(n - 3, memo)
+    return memo[n]
